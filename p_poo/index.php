@@ -1,19 +1,25 @@
 <?php
 
 require_once 'Classes/Produto.php';
-require_once 'Classes/Livro.php';
+require_once 'Classes/GerenciadorProduto.php';
 
+$gerenciador = new GerenciadorProduto();
 
-$produto = new Produto();
-$produto->setValor(1.5);
-$produto->setQuantidade(10);
+$gerenciador->adicionarProduto(new Produto(1, 'Notebook', 3500.00, 10));
+$gerenciador->adicionarProduto(new Produto(2, 'Mouse', 50.00, 100  ));
 
-echo "Produto: " . $produto->getValor();
+echo "Produtos cadastrados:\n";
 
+$gerenciador->listarProdutos();
 
-// $livro = new Livro('Teste da Silva', 'Lorem ipsum');
+$gerenciador->atualizarProduto(new Produto(2, 'Mouse Gamer', 99.90, 50));
 
+$produto = $gerenciador->buscarProduto(2);
+if ($produto) {
+    echo "\nProduto encontrado:\n" . $produto . PHP_EOL;
+}
 
+$gerenciador->removerProduto(1);
 
-// echo "Temos " . $livro->getQuantidadeLivros() . " do livro" . $livro->getTitulo();
-
+echo "\nProdutos após remoção:\n";
+$gerenciador->listarProdutos();

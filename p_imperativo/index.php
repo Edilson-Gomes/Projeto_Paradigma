@@ -2,24 +2,25 @@
 
 declare(strict_types=1);
 
-# arquivos importados
-require_once 'Data\autores.php';
-require_once 'Data\livros.php';
+require_once 'Data/produtos.php';
 
-# criando autores
-$autor['nome'] = 'J.J.Tolkien';
-$autor['cpf'] = '111.222.333-44';
-$autor['livros_publicados'] = 3;
 
-# criando livro
-$livro['titulo'] = 'O hobbit';
-$livro['descricao'] = 'Uma jornada inesperada';
-$livro['autor'] = $autor;
-$livro['valor'] = 1.5;
-$livro['quantidade'] = 10;
 
-# metodos instanciados
-print_r(exibirAutor($autor));
-print_r(exibirLivro($livro));
+adicionarProduto($produtos, 1, 'Notebook', 3500.00, 10);
+adicionarProduto($produtos, 2, 'Mouse', 50.00, 100);
 
-print_r($livro);
+echo "Produtos cadastrados:\n";
+listarProdutos($produtos);
+
+atualizarProduto($produtos, 2, 'Mouse Gamer', 99.90, 50);
+
+$produto = buscarProduto($produtos, 2);
+if ($produto) {
+    echo "\nProduto encontrado:\n";
+    echo "ID: {$produto['id']}, Nome: {$produto['nome']}, Preço: R$ " . number_format($produto['preco'], 2, ',', '.') . ", Quantidade: {$produto['quantidade']}" . PHP_EOL;
+}
+
+removerProduto($produtos, 1);
+
+echo "\nProdutos após remoção:\n";
+listarProdutos($produtos);
