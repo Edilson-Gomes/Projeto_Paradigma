@@ -94,11 +94,12 @@ function adicionarProduto(&$produtos, int $id, string $nome, float $preco): void
 
 ```php
 class Produto {
-    public function __construct(
-        public int $id,
-        public string $nome,
-        public float $preco
-    ) {}
+     public function __construct(int $id, string $nome, ?float $valor = null, ?int $quantidade = null){        
+        $this->id = $id;
+        $this->nome = $nome;
+        $this->valor = $valor;
+        $this->quantidade = $quantidade;   
+    }
 }
 ```
 
